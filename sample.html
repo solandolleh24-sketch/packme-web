@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>샘플 포스터 안내 — PACKME 2026</title>
+<meta name="description" content="회원가입 없이 1분 만에 완성되는 2026 스타터팩 포스터 샘플을 확인해보세요.">
+<meta name="theme-color" content="#f6f3ec">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%93%A6%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -130,7 +132,8 @@
   <script src="assets/js/state.js"></script>
   <script src="assets/js/poster.js"></script>
   <script>
-    (function () {
+    (async function () {
+      if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch (e) {} }
       var samples = [
         { el: "s1", sel: { archetype: "creator", state: "weekend", taste: "craft", belonging: "camera", habit: "singing", tone: "exaggerated", captionSeed: 0 } },
         { el: "s2", sel: { archetype: "jobseeker", state: "jobhunt", taste: "reading", belonging: "diary", habit: "journaling", tone: "selfmock", captionSeed: 1 } },
@@ -138,7 +141,8 @@
         { el: "s4", sel: { archetype: "gymrat", state: "burnout", taste: "gaming", belonging: "vitamin", habit: "gym", tone: "chaos", captionSeed: 2 } }
       ];
       samples.forEach(function (s) {
-        PackmePoster.render(document.getElementById(s.el), s.sel);
+        try { PackmePoster.render(document.getElementById(s.el), s.sel); }
+        catch (e) { console.error("sample render failed", e); }
       });
     })();
   </script>

@@ -175,6 +175,8 @@ img, svg { max-width: 100%; display: block; }
   color: #fff;
   box-shadow: var(--shadow-hard-sm);
 }
+.tile[aria-pressed="true"] .name::after,
+.tile[aria-pressed="true"] .t-md::after { content: " ✓"; }
 .tile .emoji { font-size: 22px; }
 .tile .name { font-weight: 700; font-size: 14px; }
 .tile .tagline { font-size: 12px; opacity: .8; }
@@ -193,12 +195,16 @@ img, svg { max-width: 100%; display: block; }
   border: 2px solid var(--line);
   background: var(--panel);
   border-radius: 999px;
-  padding: 8px 14px;
+  padding: 10px 16px;
+  min-height: 44px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
 }
 .chip.selected { background: var(--ink); color: var(--paper); }
+.chip[aria-pressed="true"]::after { content: " ✓"; }
 .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
 
 /* ---------- radio card (tone picker) ---------- */
@@ -228,6 +234,7 @@ img, svg { max-width: 100%; display: block; }
   background: var(--panel);
   color: var(--ink);
   padding: 12px 20px;
+  min-height: 48px;
   border-radius: 999px;
   font-weight: 700;
   font-size: 14px;
@@ -280,6 +287,11 @@ img, svg { max-width: 100%; display: block; }
   display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; padding: 40px 0 16px;
 }
 .hero .t-sm { max-width: 480px; }
+
+@media (max-width: 480px) {
+  .hero { padding: 20px 0 12px; gap: 12px; }
+  .hero .poster-frame { max-width: 190px !important; margin-top: 0 !important; }
+}
 
 .feature-cards {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
@@ -356,3 +368,24 @@ img, svg { max-width: 100%; display: block; }
 .reaction-row .btn.picked { background: var(--accent); color: #fff; }
 
 .privacy-list { display: flex; flex-direction: column; gap: 16px; }
+
+/* ---------- accessibility: focus + motion ---------- */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.tile:focus-visible,
+.chip:focus-visible,
+.tone-card:focus-within {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

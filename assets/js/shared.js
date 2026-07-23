@@ -1,6 +1,6 @@
 /* PACKME 2026 — shared poster viewer: read from URL, show reactions, start a friend's own version */
 
-(function () {
+(async function () {
   var D = window.PACKME_DATA;
   var selection = window.PackmeState.readFromLocation();
 
@@ -10,10 +10,17 @@
     return;
   }
 
+  if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch (e) {} }
+
   var frame = document.getElementById("posterFrame");
   var canvas = document.getElementById("posterCanvas");
-  frame.setAttribute("data-tone", selection.tone || "positive");
-  PackmePoster.render(canvas, selection);
+  try {
+    frame.setAttribute("data-tone", selection.tone || "positive");
+    PackmePoster.render(canvas, selection);
+  } catch (e) {
+    console.error("shared poster render failed", e);
+    PackmeUI.showToast("포스터를 그리는 데 문제가 생겼어요. 새로고침해 주세요.");
+  }
 
   var l = PackmePoster.lookup(selection);
   var summary = document.getElementById("summaryBox");
@@ -48,6 +55,24 @@
   });
 
   var shareUrl = window.location.href.split("#")[0];
+
+  document.getElementById("shareBtn").addEventListener("click", async function () {
+    try {
+      var result = await PackmeUI.shareResult(canvas, {
+        title: "친구의 2026 스타터팩",
+        text: "이 스타터팩 인정해? 반박하려면 네 버전으로 증명해봐",
+        url: shareUrl,
+        filename: "packme2026-friend-starterpack.png"
+      });
+      if (result.method === "download-fallback") PackmeUI.showToast("공유 대신 이미지로 저장했어요");
+      else if (result.method === "cancel") { /* no-op */ }
+      else if (result.success) PackmeUI.showToast("공유했어요");
+      else PackmeUI.showToast("공유에 실패했어요. 이미지를 저장해 보세요.");
+    } catch (e) {
+      console.error("share failed", e);
+      PackmeUI.showToast("공유에 실패했어요.");
+    }
+  });
 
   document.getElementById("copyLinkBtn").addEventListener("click", function () {
     var done = function () { PackmeUI.showToast("링크를 복사했어요"); };
