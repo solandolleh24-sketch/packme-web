@@ -8,11 +8,13 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
   .wizard-grid { display: grid; grid-template-columns: 1fr 380px; gap: 32px; align-items: start; }
+  .preview-col { position: sticky; top: 20px; }
   @media (max-width: 860px) {
     .wizard-grid { grid-template-columns: 1fr; }
-    .wizard-grid .preview-col { order: -1; }
+    /* Choices must come first on mobile — a full-size sticky poster preview
+       above the fold made the tile grids look hidden/unreachable. */
+    .preview-col { position: static; max-width: 220px; margin: 0 auto; }
   }
-  .preview-col { position: sticky; top: 20px; }
   .step-panel { display: none; }
   .step-panel.active { display: flex; flex-direction: column; gap: 20px; }
   .state-row { display: flex; align-items: center; gap: 16px; }
