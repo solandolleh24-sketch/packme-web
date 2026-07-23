@@ -10,9 +10,13 @@
   function persist() { window.PackmeState.save(selection); }
 
   function updatePreview() {
-    PackmePoster.render(document.getElementById("previewCanvas"), selection);
-    var frame = document.getElementById("previewFrame");
-    frame.setAttribute("data-tone", selection.tone || "positive");
+    try {
+      PackmePoster.render(document.getElementById("previewCanvas"), selection);
+      var frame = document.getElementById("previewFrame");
+      frame.setAttribute("data-tone", selection.tone || "positive");
+    } catch (e) {
+      console.error("preview render failed", e);
+    }
   }
 
   function renderBreadcrumb() {
@@ -38,7 +42,9 @@
   function buildTile(container, item, groupKey, onPick) {
     var btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "tile" + (selection[groupKey] === item.id ? " selected" : "");
+    var isSelected = selection[groupKey] === item.id;
+    btn.className = "tile" + (isSelected ? " selected" : "");
+    btn.setAttribute("aria-pressed", String(isSelected));
     btn.innerHTML =
       '<span class="emoji">' + item.emoji + '</span>' +
       '<span class="name">' + item.name + '</span>' +
@@ -72,7 +78,9 @@
     D.states.forEach(function (s) {
       var box = document.createElement("button");
       box.type = "button";
-      box.className = "box tight tile" + (selection.state === s.id ? " selected" : "");
+      var stateSelected = selection.state === s.id;
+      box.className = "box tight tile" + (stateSelected ? " selected" : "");
+      box.setAttribute("aria-pressed", String(stateSelected));
       box.style.textAlign = "left";
       box.innerHTML =
         '<div class="state-row">' +
@@ -97,7 +105,9 @@
     list.forEach(function (item) {
       var chip = document.createElement("button");
       chip.type = "button";
-      chip.className = "chip" + (selection[groupKey] === item.id ? " selected" : "");
+      var chipSelected = selection[groupKey] === item.id;
+      chip.className = "chip" + (chipSelected ? " selected" : "");
+      chip.setAttribute("aria-pressed", String(chipSelected));
       chip.textContent = item.emoji + " " + item.name;
       chip.addEventListener("click", function () {
         selection[groupKey] = item.id;
@@ -158,7 +168,8 @@
     document.getElementById("finishBtn").disabled = !selection.tone;
   }
 
-  function init() {
+  async function init() {
+    if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch (e) {} }
     renderStep1();
     renderStep2();
     renderStep3();
