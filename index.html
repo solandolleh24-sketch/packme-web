@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PACKME 2026 — 나만의 스타터팩 포스터</title>
+<meta name="description" content="직업·현재 상태·취향을 조합해 1분 만에 나만의 2026 스타터팩 포스터를 만들고 공유하세요. 회원가입 없이, 브라우저에서만 처리됩니다.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%93%A6%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="badge">2026</span> PACKME</a>
+    <div class="spacer"></div>
+    <nav>
+      <a href="sample.html">샘플 보기</a>
+      <a href="create.html">만들기</a>
+      <a href="privacy.html">데이터 처리 안내</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1 class="t-xl">당신의 2026 스타터팩을 만들어보세요</h1>
+      <p class="t-sm">직업·현재 상태·취향을 조합해 나만의 정체성 포스터를 완성하세요</p>
+      <div class="btn-row">
+        <a class="btn accent" href="create.html">지금 바로 시작하기</a>
+      </div>
+      <p class="t-sm">회원가입 없이 1분 만에 완성 · 브라우저에서만 처리되어 개인정보 저장 없음</p>
+    </section>
+
+    <section class="split" style="margin-top:48px;">
+      <div class="col gap-16 align-center" style="align-items:center;">
+        <div class="poster-frame" data-tone="positive" style="max-width:320px;">
+          <canvas id="homePreview"></canvas>
+        </div>
+      </div>
+      <div class="col gap-24">
+        <h2 class="t-lg">이렇게 만들어져요</h2>
+        <div class="col gap-16">
+          <div class="box tight">
+            <div class="t-md">① 기본 아키타입 선택</div>
+            <div class="t-sm">직업·정체성·라이프스타일을 나타내는 아키타입 하나를 고릅니다</div>
+          </div>
+          <div class="box tight">
+            <div class="t-md">② 현재 상태 선택</div>
+            <div class="t-sm">회사 중, 퇴근 후, 주말 등 지금 이 순간의 나를 선택합니다</div>
+          </div>
+          <div class="box tight">
+            <div class="t-md">③ 구성품 3개 선택</div>
+            <div class="t-sm">취향·소지품·습관을 나타내는 아이콘을 블리스터 패키지에 담습니다</div>
+          </div>
+          <div class="box tight">
+            <div class="t-md">④ 결과 톤 선택</div>
+            <div class="t-sm">긍정적, 자조적, 과장 등 원하는 분위기로 포스터를 완성합니다</div>
+          </div>
+        </div>
+        <a class="btn primary" href="sample.html">샘플 포스터 구경하기</a>
+      </div>
+    </section>
+
+    <section class="row wrap-row gap-16 justify-center" style="margin-top:56px;">
+      <a class="link-card" href="shared.html">
+        <div class="title">친구 포스터 보기</div>
+        <div class="desc">공유받은 링크가 있다면 여기서 확인하세요</div>
+      </a>
+      <a class="link-card" href="privacy.html">
+        <div class="title">데이터 처리 안내</div>
+        <div class="desc">모든 데이터는 브라우저 안에서만 처리되며 서버에 저장되지 않습니다</div>
+      </a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>PACKME 2026 · 정적 웹 · 서버 저장 없음</span>
+    <span><a href="privacy.html">개인정보 처리 방침</a></span>
+  </footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/state.js"></script>
+  <script src="assets/js/poster.js"></script>
+  <script>
+    (function () {
+      var canvas = document.getElementById("homePreview");
+      var sample = {
+        archetype: "dev", state: "afterwork", taste: "gaming",
+        belonging: "airpods", habit: "lateNight", tone: "positive", captionSeed: 0
+      };
+      PackmePoster.render(canvas, sample);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>내 2026 스타터팩 — PACKME</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%93%A6%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="badge">2026</span> PACKME</a>
+    <div class="spacer"></div>
+    <span class="t-md">내 2026 스타터팩</span>
+  </header>
+
+  <main class="wrap">
+    <div class="split">
+      <div class="col gap-16 align-center" style="align-items:center;">
+        <div class="poster-frame" id="posterFrame" style="max-width:420px;">
+          <canvas id="posterCanvas"></canvas>
+        </div>
+        <div class="btn-row justify-center">
+          <button class="btn accent" id="downloadBtn">PNG로 저장</button>
+          <button class="btn primary" id="rerollBtn">다른 문구 보기</button>
+          <a class="btn secondary" href="create.html">다시 만들기</a>
+        </div>
+      </div>
+
+      <div class="col gap-20">
+        <div class="box">
+          <div class="t-md" style="margin-bottom:10px;">공유 링크</div>
+          <input class="input" id="shareUrl" type="text" readonly>
+          <div class="btn-row" style="margin-top:10px;">
+            <button class="btn secondary" id="copyLinkBtn">링크 복사</button>
+            <button class="btn secondary" id="showQrBtn">QR 코드 보기</button>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="t-md" style="margin-bottom:10px;">QR 코드</div>
+          <div class="row justify-center">
+            <div class="qr-box"><canvas id="qrInlineCanvas" width="180" height="180"></canvas></div>
+          </div>
+          <p class="t-sm center-text" style="margin-top:8px;">스마트폰으로 스캔하면 이 포스터를 바로 볼 수 있어요</p>
+        </div>
+
+        <div class="box">
+          <div class="t-sm">브라우저 내에서만 처리됩니다</div>
+          <div class="t-sm">선택값과 이미지는 서버에 저장되지 않아요. 공유 링크 파라미터와 내 기기에만 보관됩니다.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- QR modal -->
+  <div class="modal-backdrop" id="qrModal">
+    <div class="modal">
+      <div class="t-md">QR 코드로 공유하기</div>
+      <div class="qr-box"><canvas id="qrModalCanvas" width="220" height="220"></canvas></div>
+      <p class="t-sm">이 QR 코드를 스캔하면 내 포스터 페이지로 이동합니다</p>
+      <button class="btn secondary" id="closeQrModal">닫기</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/state.js"></script>
+  <script src="assets/js/poster.js"></script>
+  <script src="assets/js/qrcode.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/result.js"></script>
+</body>
+</html>
