@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>친구의 2026 스타터팩 — PACKME</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%93%A6%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="badge">2026</span> PACKME</a>
+    <div class="spacer"></div>
+    <nav><a href="create.html">내 스타터팩 만들기</a></nav>
+  </header>
+
+  <main class="wrap">
+    <div id="emptyState" class="col gap-16 align-center center-text" style="display:none; padding:60px 0;">
+      <h1 class="t-lg">공유받은 포스터를 찾을 수 없어요</h1>
+      <p class="t-sm">유효한 공유 링크로 다시 접속하거나, 직접 나만의 스타터팩을 만들어보세요.</p>
+      <a class="btn accent" href="create.html">지금 내 스타터팩 만들기</a>
+    </div>
+
+    <div id="content" class="split">
+      <div class="col gap-24 align-center" style="align-items:center; max-width:420px;">
+        <div class="poster-frame" id="posterFrame" style="max-width:380px;">
+          <canvas id="posterCanvas"></canvas>
+        </div>
+        <div class="reaction-row" id="reactionRow"></div>
+        <button class="btn accent block" id="makeMyOwnBtn">자기 버전 만들기</button>
+      </div>
+
+      <div class="col gap-20">
+        <div class="t-md">친구의 2026 스타터팩</div>
+        <div class="box">
+          <div class="col gap-12" id="summaryBox"></div>
+        </div>
+        <div class="box">
+          <div class="t-sm">이 포스터는 브라우저에서만 생성되었습니다.</div>
+          <div class="t-sm">선택값은 서버에 저장되지 않으며 URL 파라미터로만 공유됩니다.</div>
+        </div>
+        <div class="btn-row">
+          <button class="btn secondary" id="copyLinkBtn">링크 복사</button>
+          <button class="btn secondary" id="showQrBtn">QR 코드 보기</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-backdrop" id="qrModal">
+    <div class="modal">
+      <div class="t-md">QR 코드로 공유하기</div>
+      <div class="qr-box"><canvas id="qrModalCanvas" width="220" height="220"></canvas></div>
+      <p class="t-sm">카메라로 스캔하면 이 포스터로 바로 연결됩니다.</p>
+      <button class="btn secondary" id="closeQrModal">닫기</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/state.js"></script>
+  <script src="assets/js/poster.js"></script>
+  <script src="assets/js/qrcode.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/shared.js"></script>
+</body>
+</html>
